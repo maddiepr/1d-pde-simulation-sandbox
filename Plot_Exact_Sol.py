@@ -37,7 +37,4 @@ def plot_exact_solution_diffusion_source(alpha,
     variance_theory = np.sum(((x - mean_theory)**2) * exact_sol) / np.sum(exact_sol)
     sigma_theory = np.sqrt(variance_theory)
 
-    # Plot the scaled solution
-    #plt.plot(x, exact_sol, 'r-', label=f"Theory: μ={mean_theory:.2f}, σ={sigma_theory:.2f}")
-    
     return exact_sol

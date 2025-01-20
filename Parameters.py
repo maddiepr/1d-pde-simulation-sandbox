@@ -1,10 +1,10 @@
 import numpy as np
 
-number_of_realizations = 10**5
+number_of_realizations = 10**6
 
 parameters = {
     "seed": 52,
-    "number_of_steps": 10**3 ,
+    "number_of_steps": 10**4 ,
     "number_of_realizations": number_of_realizations,
     "final_time": 1,
     "diffusion_coefficient": 1,

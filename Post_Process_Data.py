@@ -31,7 +31,7 @@ T_vals = pd.read_csv(T_vals_file_path, header=None ).to_numpy()
 # Find the number of counts in each bin 
 counts, bin_edges = hist_diy(number_of_bins, positions, num_realizations, T_vals)
 
-plot_normalized_histogram(counts, bin_edges)
+plot_normalized_histogram(counts, bin_edges, num_realizations, positions)
 
 
 '''
