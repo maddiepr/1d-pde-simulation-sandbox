@@ -1,0 +1,6 @@
+# Required Python packages for 1D PDE simulation sandbox
+# Install with: pip install -r requirements.txt
+
+numpy
+matplotlib
+scripy
