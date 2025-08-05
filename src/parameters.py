@@ -3,6 +3,13 @@ parameters.py
 
 Defines reusable and batch parameter sets for 1D Monte Carlo PDE simulations.
 Each configuration is dynamically generated to ensure consistency across fields.
+
+The main generator function yields the parameter dictionaries for each unique
+combination of values across specified parameter lists. These dictionaries are
+used by batch-run scripts to configure simulations.
+
+All array (e.g. initial conditions) are generated dynamically based on the 
+number of particles.
 """
 
 import numpy as np
@@ -10,8 +17,24 @@ from itertools import product
 
 def generate_batch_parameters():
     """
-    Yields dictionaries for each unique parameter combination.
-    Uses a full Cartesian product across the specified parameter list.
+    Yields dictionaries representing simulation parameters.
+    
+    Each parameter set corresponding to a unique combination of:
+    - delta_t (time step size)
+    - diff_coe (diffusion coefficient)
+    - x0 (starting position)
+    - final_time (used to calculate num_steps)
+
+    Returns:
+        dict: A parameter set with fields:
+            - 'label': A string label for use in output filenames
+            - 'num_particles': int
+            - 'num_steps': int (computed from final_time / delta_t)
+            - 'delta_t': float
+            - 'diff_coe': float
+            - 'final_time': float
+            - 'initial_pos': np.ndarray of shape (num_particles, )
+
     """
     num_particles_list = [10000]
     delta_t_list = [0.01, 0.05]
