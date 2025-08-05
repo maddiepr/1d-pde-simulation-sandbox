@@ -1,0 +1,7 @@
+# Ignore compiled files and temporary dtat
+__pycache__/
+*.pyc 
+*.pyo 
+.ipynb_checkpoints/
+.env/
+data/
