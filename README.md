@@ -24,7 +24,7 @@ Particles undergo stochastic motion with path weights governed by the PDE. The f
 ## 🗂 Project Structure
 
 ```text
-monte-carlo-1d/
+1d-pde-simulation-sandbox/
 ├── run_reaction.py         # Script to run reaction-diffusion simulation
 ├── run_advection.py        # Script to run the advection-diffusion simulation
 
