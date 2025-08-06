@@ -26,12 +26,12 @@ Usage:
 
 # --- Imports ---
 from src.parameters import generate_batch_parameters
-# from src.diffusion import simulate_diffusion_source_realizations  
+from src.diffusion import simulate_diffusion_source_realizations  
 # from src.advection import compute_velocity_field                  
 # from src.utils import save_simulation_data                        
 
 # --- Simulation Wrapper Function --
-def run_advection_simulation(parameters):
+def run_advection_simulation(params):
     """
     Wrapper function to run a single advection-difusion simulation.
 
@@ -49,18 +49,20 @@ def run_advection_simulation(parameters):
     Returns:
         tuple: (positions, weights)
     """
-    # TODO: call simulate_diffusion_source_realizations
-    # return positions, weights
-    pass
+    return simulate_diffusion_source_realizations(
+        num_steps=params["num_steps"],
+        num_realizations=params["num_particles"],
+        diff_coe=params["diff_coe"],
+        delta_t=params["delta_t"],
+        int_pos=params["initial_pos"],
+        drift_function=None,             # No advection in this test
+        reaction_function=None           # Will later use compute_reaction_rate
+    )
 
 # --- Batch Execution Loop ---
 def main():
     for params in generate_batch_parameters():
         print(f"\nRunning Simulation: {params['label']}")
-
-        # TODO: add drift and reaction functions (if needed)
-        # params["drift function"] = None
-        # params["advection_function"] = compute_velocity_field
 
         results = run_advection_simulation(params)
 

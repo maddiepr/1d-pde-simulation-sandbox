@@ -8,7 +8,7 @@ The main generator function yields the parameter dictionaries for each unique
 combination of values across specified parameter lists. These dictionaries are
 used by batch-run scripts to configure simulations.
 
-All array (e.g. initial conditions) are generated dynamically based on the 
+All arrays (e.g. initial conditions) are generated dynamically based on the 
 number of particles.
 """
 
@@ -19,9 +19,11 @@ def generate_batch_parameters():
     """
     Yields dictionaries representing simulation parameters.
     
-    Each parameter set corresponding to a unique combination of:
+    Each parameter set corresponds to a unique combination of:
     - delta_t (time step size)
     - diff_coe (diffusion coefficient)
+    - alpha (reaction strength)
+    - reaction_type (e.g 'linear')
     - x0 (starting position)
     - final_time (used to calculate num_steps)
 
@@ -33,27 +35,41 @@ def generate_batch_parameters():
             - 'delta_t': float
             - 'diff_coe': float
             - 'final_time': float
-            - 'initial_pos': np.ndarray of shape (num_particles, )
+            - 'initial_pos': np.ndarray of shape (num_particles, ),
+            - 'reaction_type': str
 
     """
-    num_particles_list = [10000]
-    delta_t_list = [0.01, 0.05]
-    diff_coe_list = [1.0, 2.0]
-    start_pos_list = [0.0, -2.0]
-    final_time_list = [1.0]
+    param_grid = {
+        "num_particles": [10000],
+        "delta_t": [0.01, 0.05],
+        "diff_coe": [1.0, 2.0],
+        "alpha": [1.0],
+        "x0": [1.0, -2.0],
+        "final_time": [1.0],
+        "reaction_type": ["linear"]
+    }
 
-    for delta_t, diff_coe, num_particles, x0, final_time in product(
-        delta_t_list, diff_coe_list, num_particles_list, start_pos_list, final_time_list
-    ):
-        num_steps = int(final_time / delta_t)
-        label = f"T_{final_time:.1f}__D_{diff_coe:.1f}__dt_{delta_t:.3f}__x0_{x0:.1f}"
+    keys = list(param_grid.keys())
+    value_lists = [param_grid[k] for k in keys]
+
+    for values in product(*value_lists):
+        params = dict(zip(keys, values))
+    
+        num_steps = int(params["final_time"] / params["delta_t"])
+        label = (
+            f"T_{params['final_time']:.1f}__D_{params['diff_coe']:.1f}"
+            f"__alpha_{params['alpha']:.1f}__type_{params['reaction_type']}"
+            f"__x0_{params['x0']:.1f}"
+        )
 
         yield {
             "label": label, 
-            "num_particles": num_particles,
+            "num_particles": params["num_particles"],
             "num_steps": num_steps,
-            "delta_t": delta_t,
-            "diff_coe": diff_coe,
-            "final_time": final_time,
-            "initial_pos": np.ones(num_particles) * x0
+            "delta_t": params["delta_t"],
+            "diff_coe": params["diff_coe"],
+            "alpha": params["alpha"],
+            "reaction_type": params["reaction_type"],
+            "final_time": params["final_time"],
+            "initial_pos": np.ones(params["num_particles"]) * params["x0"]
         }

@@ -23,6 +23,7 @@ def test_generate_parameters():
         assert isinstance(p["delta_t"], float)
         assert isinstance(p["diff_coe"], float)
         assert isinstance(p["final_time"], float)
+        assert isinstance(p["reaction_type"], str)
 
         # --- Array Checks ---
         assert isinstance(p["initial_pos"], np.ndarray)

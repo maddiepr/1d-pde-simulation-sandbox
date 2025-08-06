@@ -1,9 +1,12 @@
 """
 diffusion.py
 
-This module contains the core logic for simulating 1D diffusion processes using Monte Carlo methods.
+This module contains the core logic for simulating 1D diffusion processes 
+using Monte Carlo methods.
 
-The main function simulates discrete particle stepping under stochastic motion, with optional support for reaction or advection terms passed as callable update rules.
+The main function simulates discrete particle stepping under stochastic 
+motion, with optional support for reaction or advection terms passed as 
+callable update rules.
 
 Key Responsibilities:
 - Initialize particle positions
@@ -12,7 +15,8 @@ Key Responsibilities:
 - Return or save final positions and weights for statistical analysis
 
 Typical Usage:
-- Called by entry-point scripts (e.g. 'run_reaction.py', 'run_advection.py')
+- Called by entry-point scripts (e.g. 'run_batch_reaction.py',
+'run_batch_advection.py')
 - Can be configured via direct parameters or external config modules
 
 Planned Extensions:
@@ -36,13 +40,13 @@ def simulate_diffusion_source_realizations(
     Simulates diffusion of particles with optional drift or reaction.
 
     Args:
-        num_steps (int)
-        num_realizations (int)
-        diff_coe (float)
-        delta_t (float)
-        int_pos (float)
-        drift_function (callable or None)
-        reaction_function (callable or None)
+        num_steps: int
+        num_realizations: int
+        diff_coe: float
+        delta_t: float
+        int_pos: np.ndaray
+        drift_function: callable
+        reaction_function: callable
 
     Returns:
         positions (np.ndarray): Final particle positions
@@ -51,7 +55,7 @@ def simulate_diffusion_source_realizations(
 
     # --- Initialize positions and weights ---
     positions = np.copy(int_pos)            # shape: (num_realizations, )
-    weights = np.ones(num_realizations)     # All paths start with weight 1
+    weights = np.ones(num_realizations)     # all paths start with weight 1
 
     # --- Precompute constants ---
     sqrt_2Ddt = np.sqrt(2 * diff_coe * delta_t)
@@ -59,20 +63,20 @@ def simulate_diffusion_source_realizations(
     # --- Time stepping loop ---
     for step in range(num_steps):
         
-        # --- Apply drift (advection) if provided ---
+        # --- Apply drift (advection) term ---
         if drift_function is not None:           
             drift = drift_function(positions)   # shape: (num_realizations, )
         else:
             drift = 0.0                         # scalar drift = 0 if none provided
 
-        # --- Compute Brownian step + drift step ---
+        # --- Brownian step + drift step ---
         noise = np.random.normal(loc=0.0, scale=1.0, size=num_realizations)
         delta_x = drift*delta_t + sqrt_2Ddt * noise
 
         # --- Update positions ---
         positions += delta_x
 
-        # --- Apply reaction weight updates, if needed ---
+        # --- Apply reaction weight updates ---
         if reaction_function is not None:
             reaction_rate = reaction_function(positions)    # shape: (num_realizations, )
             weights *= np.exp(-reaction_rate * delta_t)     # multiplicative weight decay

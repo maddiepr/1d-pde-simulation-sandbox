@@ -43,7 +43,9 @@ Particles undergo stochastic motion with path weights governed by the PDE. The f
 │  └── visualize_advection.ipynb
 
 ├── tests/                  # Unit and validation tests
+│  ├── test_diffusion.py
 │  ├── test_parameters.py
+│  ├── test_reaction.py
 │  ├── test_run_batch_advection.py
 │  ├── test_run_batch_reaction.py
 

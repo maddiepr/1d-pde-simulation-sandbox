@@ -15,7 +15,7 @@ Modules Used:
 - 'src.utils': Functions for saving results and basic diagnostics
 
 To configure the simulation:
-- Import parameter sets from src/parameters.py
+- Import parameter sets from src.parameters.py
 
 Outputs:
 - Saves final positions and weights to the 'data/' directory
@@ -27,41 +27,49 @@ Usage:
 
 # --- Imports ---
 from src.parameters import generate_batch_parameters
-# from src.diffusion import simulate_diffusion_source_realizations
-# from src.reaction import compute_reaction_rate
+from src.diffusion import simulate_diffusion_source_realizations
+from src.reaction import get_reaction_function 
 # from src.utils import save_simulation_data
 
 # --- Simulation Wrapper Function ---
 def run_reaction_simulation(params):
     """
-    Wrapper function to run a single reaction-difusion simulation.
+    Runs a single reaction-diffusion simulation using Monte Carlo methods.
 
     Args:
         params (dict): Simulation configuration dictionary containing:
-            - num_steps
-            - num_particles
-            - delta_t
-            - diff_coe
-            - initial_pos
-            - drift_function
-            - reaction_function (optional)
-            - label (for output)
+            - num_steps: int
+            - num_particles: int
+            - delta_t: int
+            - diff_coe: float
+            - alpha: float
+            - initial_pos: np.ndarray
+            - reaction_function: callable
+            - label: str
 
     Returns:
         tuple: (positions, weights)
     """
-    # TODO: call simulate_diffusion_source_realizations
-    # return positions, weights
-    pass
+    return simulate_diffusion_source_realizations(
+        num_steps=params["num_steps"],
+        num_realizations=params["num_particles"],
+        diff_coe=params["diff_coe"],
+        delta_t=params["delta_t"],
+        int_pos=params["initial_pos"],
+        drift_function=None,     
+        reaction_function=params["reaction_function"]
+    )
 
 # --- Batch Execution Loop ---
 def main():
     for params in generate_batch_parameters():
         print(f"\nRunning Simulation: {params['label']}")
 
-        # TODO: add drift and reaction functions (if needed)
-        # params["drift_function"] = None
-        # params["reaction_function"] = compute_reaction_rate
+        # Construct appropriate reaction function based on type
+        params["reaction_function"] = get_reaction_function(
+            reaction_type= params["reaction_type"],
+            alpha = params["alpha"]
+        )
 
         results = run_reaction_simulation(params)
 
