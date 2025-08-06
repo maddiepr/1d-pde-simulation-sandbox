@@ -37,6 +37,16 @@ Particles undergo stochastic motion with path weights governed by the PDE. The f
 │  └── utils.py                 # Histogram, plotting, and post-processing utilities
 
 ├── data/                       # Output particle data and weights
+│  ├── reaction/
+│  │  ├── T1.0_D1.0_alpha1.0_x0_0.0/
+│  │  │  ├── positions.npy
+│  │  │  └── weights.npy
+│  │  └── ...
+│  ├── advection/
+│  │  ├── T1.0_D1.0_alpha1.0_x0_0.0/ 
+│  │  │  ├── positions.npy
+│  │  │  └── weights.npy
+│  │  └── ...
 
 ├── notebooks/                  # Notebooks for visualization and exploration
 │  ├── visualize_reaction.ipynb

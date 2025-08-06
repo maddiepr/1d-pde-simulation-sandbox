@@ -29,7 +29,7 @@ Usage:
 from src.parameters import generate_batch_parameters
 from src.diffusion import simulate_diffusion_source_realizations
 from src.reaction import get_reaction_function 
-# from src.utils import save_simulation_data
+from src.utils import save_simulation_data
 
 # --- Simulation Wrapper Function ---
 def run_reaction_simulation(params):
@@ -65,7 +65,7 @@ def main():
     for params in generate_batch_parameters():
         print(f"\nRunning Simulation: {params['label']}")
 
-        # Construct appropriate reaction function 
+        # --- Construct appropriate reaction function ---
         params["reaction_function"] = get_reaction_function(
             reaction_type= params["reaction_type"],
             alpha = params["alpha"]
@@ -73,8 +73,8 @@ def main():
 
         results = run_reaction_simulation(params)
 
-        # TODO: save results
-        # save_simulation_data(*results, filename_prefix=f"reaction_{params['label']}")
+        # --- Save results ---
+        save_simulation_data(*results, label=params["label"], sim_type="reaction")
         print(f"Finished: {params['label']}")
 
 # --- Run as script ---
