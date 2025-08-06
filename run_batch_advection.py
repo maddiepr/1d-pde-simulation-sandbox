@@ -44,7 +44,7 @@ def run_advection_simulation(parameters):
             - diff_coe
             - initial_pos
             - drift_function
-            - reaction_function (optional)
+            - advection_function (optional)
             - label (for output)
 
     Returns:
@@ -61,7 +61,7 @@ def main():
 
         # TODO: add drift and reaction functions (if needed)
         # params["drift function"] = compute velocity field
-        # params["reaction_function"] = None
+        # params["advection_function"] = None
 
         results = run_advection_simulation(params)
 
