@@ -25,24 +25,27 @@ Particles undergo stochastic motion with path weights governed by the PDE. The f
 
 ```text
 1d-pde-simulation-sandbox/
-├── run_batch_reaction.py   # Script to run reaction-diffusion simulation
-├── run_batch_ advection.py # Script to run the advection-diffusion simulation
+├── run_batch_reaction.py       # Script to run reaction-diffusion simulation
+├── run_batch_ advection.py     # Script to run the advection-diffusion simulation
 
 ├── src/
 │  ├── __init__.py
-│  ├── diffusion.py         # Shared core diffusion logic
-│  ├── parameters.py        # Defines parameters for simulation
-│  ├── reaction.py          # Reaction term logic 
-│  ├── advection.py         # Advection term logic 
-│  └── utils.py             # Histogram, plotting, and post-processing utilities
+│  ├── diffusion.py             # Shared core diffusion logic
+│  ├── parameters.py            # Defines parameters for simulation
+│  ├── reaction.py              # Reaction term logic 
+│  ├── advection.py             # Advection term logic 
+│  └── utils.py                 # Histogram, plotting, and post-processing utilities
 
-├── data/                   # Output particle data and weights
+├── data/                       # Output particle data and weights
 
-├── notebooks/              # Notebooks for visualization and exploration
+├── notebooks/                  # Notebooks for visualization and exploration
 │  ├── visualize_reaction.ipynb
 │  └── visualize_advection.ipynb
 
-├── docs/                   # Documentation, example plots, and reference figures
+├── tests/                  # Unit and validation tests
+│  ├── test_parameters.py
+
+├── docs/                       # Documentation, example plots, and reference figures
 │  ├── sample_plot.png
 
 ├── requirements.txt
