@@ -54,11 +54,10 @@ def run_advection_simulation(params):
         diff_coe=params["diff_coe"],
         delta_t=params["delta_t"],
         int_pos=params["initial_pos"],
-        advection_function=params["advection_type"],
+        advection_function=params["advection_function"],
         reaction_function=None
     )
 
-# --- Batch Execution Loop ---
 def main():
     for params in generate_batch_parameters():
         print(f"\nRunning Simulation: {params['label']}")
