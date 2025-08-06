@@ -7,7 +7,7 @@ using discrete particle stepping.
 Particles undergo stochastic diffusion with path weights updated according to 
 a spatially dependent reaction term.
 The simulation outputs the final particle positions and associated weights for
- statistical analysis and comparison to exact solutions.
+statistical analysis and comparison to exact solutions.
 
 Modules Used:
 - 'src.diffusion': Core stepping logic for particle motion
@@ -15,22 +15,21 @@ Modules Used:
 - 'src.utils': Functions for saving results and basic diagnostics
 
 To configure the simulation:
-- Modify parameter values directly in this script or import from an external
-config
+- Import parameter sets from src/parameters.py
 
 Outputs:
 - Saves final positions and weights to the 'data/' directory
 - Results can be visualized using 'notebooks/visualize_reaction.ipynb'
 
 Usage:
-    python run_reaction.py
+    python run_batch_reaction.py
 """
 
 # --- Imports ---
 from src.parameters import generate_batch_parameters
 # from src.diffusion import simulate_diffusion_source_realizations
-# from scr.reaction import compute_reaction_rate
-# from scr.utils import save_simulation_data
+# from src.reaction import compute_reaction_rate
+# from src.utils import save_simulation_data
 
 # --- Simulation Wrapper Function ---
 def run_reaction_simulation(params):
@@ -61,13 +60,13 @@ def main():
         print(f"\nRunning Simulation: {params['label']}")
 
         # TODO: add drift and reaction functions (if needed)
-        # params["drift function"] = compute velocity field
-        # params["reaction_function"] = None
+        # params["drift_function"] = None
+        # params["reaction_function"] = compute_reaction_rate
 
         results = run_reaction_simulation(params)
 
         # TODO: save results
-        # save_simulation_data(*results, filename_prefix=f"reaction_{params['Label']}")
+        # save_simulation_data(*results, filename_prefix=f"reaction_{params['label']}")
         print(f"Finished: {params['label']}")
 
 # --- Run as script ---

@@ -14,15 +14,14 @@ Modules Used:
 - `src.utils`: Functions for saving results and basic diagnostics
 
 To configure the simulation:
-- Modify parameter values directly in this script or import from an external 
-config
+- Import parameter sets from src/parameters.py
 
 Outputs:
 - Saves final positions and weights to the `data/` directory
 - Results can be visualized using `notebooks/visualize_advection.ipynb`
 
 Usage:
-    python run_advection.py
+    python run_batch_advection.py
 """
 
 # --- Imports ---
@@ -60,13 +59,13 @@ def main():
         print(f"\nRunning Simulation: {params['label']}")
 
         # TODO: add drift and reaction functions (if needed)
-        # params["drift function"] = compute velocity field
-        # params["advection_function"] = None
+        # params["drift function"] = None
+        # params["advection_function"] = compute_velocity_field
 
         results = run_advection_simulation(params)
 
         # TODO: save results
-        # save_simulation_data(*results, filename_prefix=f"advection_{params['Label']}")
+        # save_simulation_data(*results, filename_prefix=f"advection_{params['label']}")
         print(f"Finished: {params['label']}")
 
 # --- Run as script ---

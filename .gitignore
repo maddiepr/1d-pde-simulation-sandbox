@@ -1,4 +1,4 @@
-# Ignore compiled files and temporary dtat
+# Ignore compiled files and temporary data
 __pycache__/
 *.pyc 
 *.pyo 
