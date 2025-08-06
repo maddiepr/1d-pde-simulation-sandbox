@@ -27,7 +27,7 @@ Usage:
 # --- Imports ---
 from src.parameters import generate_batch_parameters
 from src.diffusion import simulate_diffusion_source_realizations  
-# from src.advection import compute_velocity_field                  
+from src.advection import get_velocity_function                 
 # from src.utils import save_simulation_data                        
 
 # --- Simulation Wrapper Function --
@@ -42,8 +42,7 @@ def run_advection_simulation(params):
             - delta_t
             - diff_coe
             - initial_pos
-            - drift_function
-            - advection_function (optional)
+            - advection_function
             - label (for output)
 
     Returns:
@@ -55,14 +54,20 @@ def run_advection_simulation(params):
         diff_coe=params["diff_coe"],
         delta_t=params["delta_t"],
         int_pos=params["initial_pos"],
-        drift_function=None,             # No advection in this test
-        reaction_function=None           # Will later use compute_reaction_rate
+        advection_function=params["advection_type"],
+        reaction_function=None
     )
 
 # --- Batch Execution Loop ---
 def main():
     for params in generate_batch_parameters():
         print(f"\nRunning Simulation: {params['label']}")
+
+        # Construct appropriate advection function
+        params["advection_function"] = get_velocity_function(
+            advection_type= params["advection_type"],
+            alpha = params["alpha"]
+        )
 
         results = run_advection_simulation(params)
 

@@ -46,7 +46,8 @@ def generate_batch_parameters():
         "alpha": [1.0],
         "x0": [1.0, -2.0],
         "final_time": [1.0],
-        "reaction_type": ["linear"]
+        "reaction_type": ["linear"],
+        "advection_type": ["linear"]
     }
 
     keys = list(param_grid.keys())
@@ -70,6 +71,7 @@ def generate_batch_parameters():
             "diff_coe": params["diff_coe"],
             "alpha": params["alpha"],
             "reaction_type": params["reaction_type"],
+            "advection_type": params["advection_type"],
             "final_time": params["final_time"],
             "initial_pos": np.ones(params["num_particles"]) * params["x0"]
         }

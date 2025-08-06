@@ -33,7 +33,7 @@ def simulate_diffusion_source_realizations(
         diff_coe,
         delta_t,
         int_pos,
-        drift_function=None,
+        advection_function=None,
         reaction_function=None
 ):
     """
@@ -45,7 +45,7 @@ def simulate_diffusion_source_realizations(
         diff_coe: float
         delta_t: float
         int_pos: np.ndaray
-        drift_function: callable
+        advection_function: callable
         reaction_function: callable
 
     Returns:
@@ -63,9 +63,9 @@ def simulate_diffusion_source_realizations(
     # --- Time stepping loop ---
     for step in range(num_steps):
         
-        # --- Apply drift (advection) term ---
-        if drift_function is not None:           
-            drift = drift_function(positions)   # shape: (num_realizations, )
+        # --- Apply advection term ---
+        if advection_function is not None:           
+            drift = advection_function(positions)   # shape: (num_realizations, )
         else:
             drift = 0.0                         # scalar drift = 0 if none provided
 

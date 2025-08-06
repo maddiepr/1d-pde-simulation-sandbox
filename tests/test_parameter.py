@@ -24,6 +24,8 @@ def test_generate_parameters():
         assert isinstance(p["diff_coe"], float)
         assert isinstance(p["final_time"], float)
         assert isinstance(p["reaction_type"], str)
+        assert isinstance(p["advection_type"], str)
+        assert isinstance(p["alpha"], float)
 
         # --- Array Checks ---
         assert isinstance(p["initial_pos"], np.ndarray)

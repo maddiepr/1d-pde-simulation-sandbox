@@ -56,7 +56,7 @@ def run_reaction_simulation(params):
         diff_coe=params["diff_coe"],
         delta_t=params["delta_t"],
         int_pos=params["initial_pos"],
-        drift_function=None,     
+        advection_function=None,     
         reaction_function=params["reaction_function"]
     )
 
@@ -65,7 +65,7 @@ def main():
     for params in generate_batch_parameters():
         print(f"\nRunning Simulation: {params['label']}")
 
-        # Construct appropriate reaction function based on type
+        # Construct appropriate reaction function 
         params["reaction_function"] = get_reaction_function(
             reaction_type= params["reaction_type"],
             alpha = params["alpha"]

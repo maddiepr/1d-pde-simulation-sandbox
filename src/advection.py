@@ -18,3 +18,25 @@ Planned Extensions:
 - Support for divergence-dependent u(x) derived from ∂D/∂x
 - Analytical comparisons with mapped PDEs or benchmark solutions
 """
+
+def get_velocity_function(advection_type="linear", **kwargs):
+    """
+    Returns a drift velocity function u(x) based on the given advection type.
+
+    Args:
+        advection_type (str): One of ['linear', 'constant']
+        kwargs: Parameters used by the velocity field
+
+    Returns:
+        Callable[[np.ndarray], np.ndarray]: Drift velocity function u(x)
+    """
+    if advection_type == "linear":
+        alpha = kwargs.get("alpha", 1.0)
+        return lambda x: alpha * x 
+    
+    elif advection_type == "constant":
+        v = kwargs.get("v", 1.0)
+        return lambda x: v
+    
+    else:
+        raise ValueError(f"Unsupported advection type: {advection_type}")
