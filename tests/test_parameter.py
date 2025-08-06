@@ -5,6 +5,10 @@ Basic sanity tests for parameter generation used in batch simulations
 These ensure that all parameter sets are consistent and valid before running simulation.
 """
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import numpy as np
 from src.parameters import generate_batch_parameters
 
@@ -31,5 +35,5 @@ def test_generate_parameters():
 
     print("All parameter sets passed the basic validation test.")
 
-if __name__ == "main":
+if __name__ == "__main__":
     test_generate_parameters()
