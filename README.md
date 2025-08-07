@@ -33,8 +33,10 @@ Particles undergo stochastic motion with path weights governed by the PDE. The f
 │  ├── diffusion.py             # Shared core diffusion logic
 │  ├── parameters.py            # Defines parameters for simulation
 │  ├── reaction.py              # Reaction term logic 
-│  ├── advection.py             # Advection term logic 
-│  └── utils.py                 # Histogram, plotting, and post-processing utilities
+│  ├── advection.py             # Advection term logic
+│  ├── exact_solutions.py       # Get exact solutions for comparison
+│  ├── plotting.py              # Histogram, comparison plots, etc. 
+│  └── utils.py                 # Loading, saving, data wrangling
 
 ├── data/                       # Output particle data and weights
 │  ├── reaction/
@@ -57,7 +59,7 @@ Particles undergo stochastic motion with path weights governed by the PDE. The f
 │  ├── test_parameters.py
 │  ├── test_reaction.py
 │  ├── test_run_batch_advection.py
-│  ├── test_run_batch_reaction.py
+│  └── test_run_batch_reaction.py
 
 ├── docs/                       # Documentation, example plots, and reference figures
 │  ├── sample_plot.png

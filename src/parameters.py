@@ -40,12 +40,12 @@ def generate_batch_parameters():
 
     """
     param_grid = {
-        "num_particles": [10000],
-        "delta_t": [0.01, 0.05],
+        "num_particles": [10000, 1000000],
+        "delta_t": [0.001, 0.005],
         "diff_coe": [1.0, 2.0],
-        "alpha": [1.0],
+        "alpha": [0.5, 1.0, 1.5],
         "x0": [1.0, -2.0],
-        "final_time": [1.0],
+        "final_time": [0.01, 0.05, 0.10, 0.50, 1.00, 5.00, 10.00],
         "reaction_type": ["linear"],
         "advection_type": ["linear"]
     }

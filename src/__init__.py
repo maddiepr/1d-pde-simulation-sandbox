@@ -11,7 +11,8 @@ Modules:
 - utils.py: Tools for saving data, visualizing results, and histogram generation
 """
 
-from src.utils import save_simulation_data, load_simulation_data, plot_weighted_histogram
+from src.utils import save_simulation_data, load_simulation_data
+from src.plotting import plot_weighted_histogram, plot_and_save_all_histograms
 from src.diffusion import simulate_diffusion_source_realizations
 from src.reaction import get_reaction_function
 from src.advection import get_velocity_function
@@ -22,5 +23,6 @@ __all__ = [
     "plot_weighted_histogram",
     "simulate_diffusion_source_realizations",
     "get_reaction_function",
-    "get_velocity_function"
+    "get_velocity_function",
+    "plot_and_save_all_histograms"
 ]
