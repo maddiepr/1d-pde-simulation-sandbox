@@ -25,19 +25,6 @@ Particles undergo stochastic motion with path weights governed by the PDE. The f
 
 ```text
 1d-pde-simulation-sandbox/
-├── run_batch_reaction.py       # Script to run reaction-diffusion simulation
-├── run_batch_ advection.py     # Script to run the advection-diffusion simulation
-
-├── src/
-│  ├── __init__.py
-│  ├── diffusion.py             # Shared core diffusion logic
-│  ├── parameters.py            # Defines parameters for simulation
-│  ├── reaction.py              # Reaction term logic 
-│  ├── advection.py             # Advection term logic
-│  ├── exact_solutions.py       # Get exact solutions for comparison
-│  ├── plotting.py              # Histogram, comparison plots, etc. 
-│  └── utils.py                 # Loading, saving, data wrangling
-
 ├── data/                       # Output particle data and weights
 │  ├── reaction/
 │  │  ├── T1.0_D1.0_alpha1.0_x0_0.0/
@@ -49,24 +36,37 @@ Particles undergo stochastic motion with path weights governed by the PDE. The f
 │  │  │  ├── positions.npy
 │  │  │  └── weights.npy
 │  │  └── ...
-
+├── docs/                       # Documentation, example plots, and reference figures
+│  ├── reaction/
+│  │  ├── T1.0_D1.0_alpha1.0_x0_0.0.png
+│  │  └── ...
+│  ├── advection/
+│  │  ├── T1.0_D1.0_alpha1.0_x0_0.0.png
+│  │  └── ...
 ├── notebooks/                  # Notebooks for visualization and exploration
 │  ├── visualize_reaction.ipynb
 │  └── visualize_advection.ipynb
-
-├── tests/                  # Unit and validation tests
+├── src/
+│  ├── __init__.py
+│  ├── advection.py             # Advection term logic
+│  ├── diffusion.py             # Shared core diffusion logic
+│  ├── exact_solutions.py       # Compute exact solutions for both linear advection and reaction equations
+│  ├── parameters.py            # Defines parameters for simulation
+│  ├── plotting.py              # Histogram, comparison plots, etc. 
+│  ├── reaction.py              # Reaction term logic 
+│  └── utils.py                 # Loading, saving, data wrangling
+├── run_batch_reaction.py       # Script to run reaction-diffusion simulation
+├── run_batch_advection.py     # Script to run the advection-diffusion simulation
+├── requirements.txt
+├── .gitignore
+├── README.md
+└── tests/                  # Unit and validation tests
 │  ├── test_diffusion.py
 │  ├── test_parameters.py
 │  ├── test_reaction.py
 │  ├── test_run_batch_advection.py
 │  └── test_run_batch_reaction.py
 
-├── docs/                       # Documentation, example plots, and reference figures
-│  ├── sample_plot.png
-
-├── requirements.txt
-├── .gitignore
-└── README.md
 ```
 
 ---

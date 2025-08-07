@@ -26,7 +26,7 @@ Planned Extensions:
 import os
 import re
 import numpy as np
-import matplotlib.pyplot as plt
+import pandas as pd
 
 def save_simulation_data(positions, weights, label, sim_type, base_dir="data"):
     """
@@ -76,7 +76,7 @@ def load_simulation_data(folder):
 def parse_parameters_from_foldername(foldername):
     """
     Extracts parameters T, D (kappa), alpha, x0 from a folder name of the form:
-    T1.0_D1.0_alpha1.0_x0_1.0
+    T1.00_D1.0_alpha1.0_x0_1.0
 
     Returns:
         dict: { 'T': float, 'D': float, 'alpha': float, 'x0': float)}
@@ -93,3 +93,21 @@ def parse_parameters_from_foldername(foldername):
         'alpha': float(match.group("alpha")),
         'x0': float(match.group('x0'))
     }
+
+def parse_simulation_folder(base_dir):
+    """
+    Scans a directory of simulation folders and extracts parameters using
+    'parse_parameters_from_foldername'. Returns a DataFrame.
+    """
+    records = []
+
+    for folder in sorted(base_dir.iterdir()):
+        if folder.is_dir():
+            try:
+                params = parse_parameters_from_foldername(folder.name)
+                params["folder"] = folder.name
+                records.append(params)
+            except ValueError as e:
+                print(f"Skipping folder '{folder.name}': {e}")
+    
+    return pd.DataFrame(records)

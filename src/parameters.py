@@ -58,7 +58,7 @@ def generate_batch_parameters():
     
         num_steps = int(params["final_time"] / params["delta_t"])
         label = (
-            f"T{params['final_time']:.1f}"
+            f"T{params['final_time']:.2f}"
             f"_D{params['diff_coe']:.1f}"
             f"_alpha{params['alpha']:.1f}"
             f"_x0_{params['x0']:.1f}"

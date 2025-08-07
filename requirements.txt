@@ -4,3 +4,9 @@
 numpy
 matplotlib
 scripy
+seaborn
+pandas
+pathlib
+itertools
+os
+re
